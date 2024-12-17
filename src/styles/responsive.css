@@ -78,6 +78,10 @@
     width: 30%;
   }
 
+  .payment-configuration {
+    width: 30%;
+  }
+
   .content__setting {
     flex-direction: row;
   }

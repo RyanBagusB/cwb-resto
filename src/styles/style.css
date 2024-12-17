@@ -681,6 +681,7 @@ input:focus {
   display: flex;
   justify-content: end;
   z-index: 99;
+  transition: .5s;
 }
 
 .order-pay {
@@ -790,6 +791,8 @@ input:focus {
   background-color: var(--white);
   border-left: 1px solid var(--blue);
   padding: .6rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .content__info__header.configuration {
@@ -811,6 +814,56 @@ input:focus {
   padding: .2rem .8rem;
   border-radius: .4rem;
   cursor: pointer;
+}
+
+.payment-configuration__body {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  padding: .6rem;
+  margin: 0 .8rem;
+  border-bottom: 1px solid var(--blue);
+}
+
+.payment-configuration__body p {
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.payment-configuration__selection button {
+  width: 80px;
+  height: 50px;
+  color: var(--blue);
+  background-color: var(--white);
+  border: 1px solid var(--blue);
+  border-radius: .4rem;
+}
+
+.payment-configuration__selection button.active {
+  color: var(--white);
+  background-color: var(--blue);
+}
+
+.payment-configuration__footer {
+  margin-top: auto;
+  display: flex;
+  gap: .8rem;
+}
+
+.payment-configuration__footer button {
+  background-color: var(--white);
+  width: 50%;
+  border: 1px solid var(--blue);
+  padding: .6rem;
+  color: var(--blue);
+  background-color: var(--white);
+  border-radius: .4rem;
+  cursor: pointer;
+}
+
+.payment-configuration__footer button:first-child {
+  background-color: var(--blue);
+  color: var(--white);
 }
 
 @keyframes fade-in {

@@ -135,8 +135,13 @@ const Homepage = {
       <div class="payment-configuration__body">
         <p>Metode Bayar</p>
         <div class="payment-configuration__selection">
-          <button>QRIS</button>
+          <button class="active">QRIS</button>
+          <button>Cash</button>
         </div>
+      </div>
+      <div class="payment-configuration__footer">
+        <button class="payment-configuration__footer__cancel">Batalkan</button>
+        <button class"payment-configuration__footer__confirm">Konfirmasi</button>
       </div>
     `;
     
@@ -150,6 +155,12 @@ const Homepage = {
       </div>
       <button>+</button>
     `;
+
+    const cancelPayment = paymentConfiguration.querySelector('.payment-configuration__footer__cancel');
+
+    cancelPayment.addEventListener('click', () => {
+      popupPayment.style.top = '-100%';
+    });
 
     popupPayment.style.top = '0';
     popupPayment.append(contentInfoClone, paymentConfiguration);
