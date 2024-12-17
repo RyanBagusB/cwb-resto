@@ -1,78 +1,10 @@
 import { createCardItemTemplate } from "../../templates/template-creator";
 
 const items = [
-  {
-    name: 'Healthy noodle with spinach leaf',
-    category: 'Makanan',
-    priceBefore: 40000,
-    priceAfter: 20000,
-  },
-  {
-    name: 'Grilled chicken with vegetables',
-    category: 'Makanan',
-    priceBefore: 45000,
-    priceAfter: 30000,
-  },
-  {
-    name: 'Pasta with marinara sauce',
-    category: 'Makanan',
-    priceBefore: 50000,
-    priceAfter: 35000,
-  },
-  {
-    name: 'Vegetable salad with dressing',
-    category: 'Makanan',
-    priceBefore: 30000,
-    priceAfter: 18000,
-  },
-  {
-    name: 'Iced tea',
-    category: 'Minuman',
-    priceBefore: 15000,
-    priceAfter: 10000,
-  },
-  {
-    name: 'Lemonade',
-    category: 'Minuman',
-    priceBefore: 12000,
-    priceAfter: 8000,
-  },
-  {
-    name: 'Fruit smoothie',
-    category: 'Minuman',
-    priceBefore: 25000,
-    priceAfter: 18000,
-  },
-  {
-    name: 'Black coffee',
-    category: 'Minuman',
-    priceBefore: 10000,
-    priceAfter: 7000,
-  },
-  {
-    name: 'Potato chips',
-    category: 'Snack',
-    priceBefore: 10000,
-    priceAfter: 7000,
-  },
-  {
-    name: 'Chocolate bar',
-    category: 'Snack',
-    priceBefore: 8000,
-    priceAfter: 5000,
-  },
-  {
-    name: 'Cookies',
-    category: 'Snack',
-    priceBefore: 12000,
-    priceAfter: 8000,
-  },
-  {
-    name: 'Peanuts',
-    category: 'Snack',
-    priceBefore: 15000,
-    priceAfter: 10000,
-  },
+  { name: 'Healthy noodle with spinach leaf', category: 'Makanan', priceBefore: 40000, priceAfter: 20000 },
+  { name: 'Grilled chicken with vegetables', category: 'Makanan', priceBefore: 45000, priceAfter: 30000 },
+  { name: 'Iced tea', category: 'Minuman', priceBefore: 15000, priceAfter: 10000 },
+  { name: 'Potato chips', category: 'Snack', priceBefore: 10000, priceAfter: 7000 },
 ];
 
 const Homepage = {
@@ -159,83 +91,136 @@ const Homepage = {
       </div>
     `;
   },
- 
+
   async afterRender() {
+    this.renderItemsByCategory();
+    this.attachAddToCartEvents();
+  },
+
+  renderItemsByCategory() {
     const managementAllContents = document.querySelector('.management__contents__1');
     const managementFoodContents = document.querySelector('.management__contents__2');
     const managementBeverageContents = document.querySelector('.management__contents__3');
     const managementSnackContents = document.querySelector('.management__contents__4');
-    const contentInfo = document.querySelector('.content__info');
-    const orderPay = document.querySelector('.order-pay');
+    const payment = document.querySelector('.content__info > button');
 
     items.forEach((item) => {
-      managementAllContents.innerHTML += createCardItemTemplate(item);
+      const cardTemplate = createCardItemTemplate(item);
+      managementAllContents.innerHTML += cardTemplate;
 
-      if (item.category === 'Makanan') {
-        managementFoodContents.innerHTML += createCardItemTemplate(item);
-      } else if (item.category === 'Minuman') {
-        managementBeverageContents.innerHTML += createCardItemTemplate(item);
-      } else if (item.category === 'Snack') {
-        managementSnackContents.innerHTML += createCardItemTemplate(item);
-      }
+      if (item.category === 'Makanan') managementFoodContents.innerHTML += cardTemplate;
+      if (item.category === 'Minuman') managementBeverageContents.innerHTML += cardTemplate;
+      if (item.category === 'Snack') managementSnackContents.innerHTML += cardTemplate;
     });
 
-    const addButtonsToCart = document.querySelectorAll('.card__header__button');
-    addButtonsToCart.forEach((addButtonToCart) => {
-      addButtonToCart.addEventListener('click', () => {
-        const cardElement = addButtonToCart.parentElement.parentElement;
-        const itemElement = cardElement.querySelector('.card__info__content__name');
-        const existingItem = orderPay.querySelector(`[data-name="${itemElement.textContent}"]`);
-    
-        if (existingItem) {
-          const orderPayQuantity = existingItem.nextElementSibling;
-          let count = parseInt(orderPayQuantity.value);
-          orderPayQuantity.value = count + 1;
-        } else {
-          const orderPayDetail = document.createElement('div');
-          const orderPayQuantity = document.createElement('input');
-          const orderPayPrize = document.createElement('p');
-          const orderPayNote = document.createElement('input');
-          const orderPayRemove = document.createElement('button');
-    
-          const initialPrice = parseInt(cardElement.querySelector('.card__info__price__after').textContent.replace(/\D/g, ''));
-    
-          orderPayDetail.setAttribute('data-name', itemElement.textContent);
-          orderPayDetail.classList.add('order-pay__detail');
-          orderPayDetail.innerHTML = `
-            <img class="order-pay__detail__image" src="https://img.freepik.com/premium-photo/four-meat-pizza-composition-includes-four-types-meat-carbonade-chicken-cervelat-bacon-mozzarella-cheese-tomato-sauce-view-from-white-background-isolated_323569-203.jpg?ga=GA1.1.1872719977.1704454417&semt=ais_hybrid" alt="Healthy noodle" />
-            <div>
-              <p class="order-pay__detail__title">${itemElement.textContent}</p>
-              <p class="order-pay__detail__subtitle">${initialPrice.toLocaleString()}</p>
-            </div>
-          `;
-    
-          orderPayQuantity.classList.add('order-pay__detail__quantity');
-          orderPayQuantity.inputMode = 'numeric';
-          orderPayQuantity.value = 1;
-          orderPayQuantity.min = 1;
-    
-          orderPayPrize.classList.add('order-pay__detail__price');
-          orderPayPrize.textContent = `Rp ${initialPrice.toLocaleString()}`;
-    
-          orderPayNote.classList.add('order-pay__detail__note');
-          orderPayNote.placeholder = 'Catatan pesanan';
-    
-          orderPayRemove.classList.add('order-pay__detail__remove');
-          orderPayRemove.innerHTML = '<img src="./Frame 67.svg" />';
+    payment.addEventListener('click', this.showPaymentPopup);
+  },
 
-          orderPayQuantity.addEventListener('input', (e) => {
-            const quantity = parseInt(e.target.value) || 1;
-            const totalPrice = initialPrice * quantity;
-            orderPayPrize.textContent = `Rp ${totalPrice.toLocaleString()}`;
-          });
+  showPaymentPopup() {
+    const popupPayment = document.querySelector('.popup-payment');
+    const contentInfo = document.querySelector('.content__info');
+    const paymentConfiguration = document.createElement('div');
+    const paymentId = contentInfo.querySelector('.content__info__header h3');
+
+    popupPayment.innerHTML = '';
+
+    paymentConfiguration.classList.add('payment-configuration');
+    paymentConfiguration.innerHTML = `
+      <div class="content__info__header configuration">
+        <div>
+          <h3>Pembayaran</h3>
+          <p>2 opsi pembayaran tersedia</p>
+        </div>
+      </div>
+      <div class="payment-configuration__body">
+        <p>Metode Bayar</p>
+        <div class="payment-configuration__selection">
+          <button>QRIS</button>
+        </div>
+      </div>
+    `;
     
-          orderPay.append(orderPayDetail, orderPayQuantity, orderPayPrize, orderPayNote, orderPayRemove);
-        }
+    const contentInfoClone = contentInfo.cloneNode(true);
+    const contentInfoCloneHeader = contentInfoClone.querySelector('.content__info__header');
+    contentInfoCloneHeader.classList.add('configuration');
+    contentInfoCloneHeader.innerHTML = `
+      <div>
+        <h3>Konfirmasi</h3>
+        <p>${paymentId.textContent}</p>
+      </div>
+      <button>+</button>
+    `;
+
+    popupPayment.style.top = '0';
+    popupPayment.append(contentInfoClone, paymentConfiguration);
+  },
+
+  createOrderPayDetail(itemName, initialPrice) {
+    const orderPayDetail = document.createElement('div');
+    const orderPayQuantity = document.createElement('input');
+    const orderPayPrize = document.createElement('p');
+    const orderPayRemove = document.createElement('button');
+    const orderPayNote = document.createElement('input');
+
+    orderPayDetail.setAttribute('data-name', itemName);
+    orderPayDetail.classList.add('order-pay__detail');
+    orderPayDetail.innerHTML = `
+      <img class="order-pay__detail__image" src="https://img.freepik.com/premium-photo/four-meat-pizza-composition-includes-four-types-meat-carbonade-chicken-cervelat-bacon-mozzarella-cheese-tomato-sauce-view-from-white-background-isolated_323569-203.jpg?ga=GA1.1.1872719977.1704454417&semt=ais_hybrid" alt="Healthy noodle" />
+      <div>
+        <p class="order-pay__detail__title">${itemName}</p>
+        <p class="order-pay__detail__subtitle">Rp. ${initialPrice.toLocaleString()}</p>
+      </div>
+    `;
+
+    orderPayQuantity.classList.add('order-pay__detail__quantity');
+    orderPayQuantity.inputMode = 'numeric';
+    orderPayQuantity.value = 1;
+    orderPayQuantity.min = 1;
+
+    orderPayPrize.classList.add('order-pay__detail__price');
+    orderPayPrize.textContent = `Rp ${initialPrice.toLocaleString()}`;
+
+    orderPayQuantity.addEventListener('input', (e) => {
+      const quantity = parseInt(e.target.value) || 1;
+      const totalPrice = initialPrice * quantity;
+      orderPayPrize.textContent = `Rp ${totalPrice.toLocaleString()}`;
+    });
+
+    orderPayNote.classList.add('order-pay__detail__note');
+    orderPayNote.placeholder = 'Catatan pesanan';
+
+    orderPayRemove.classList.add('order-pay__detail__remove');
+    orderPayRemove.innerHTML = '<img src="./Frame 67.svg" />';
+
+    return { orderPayDetail, orderPayQuantity, orderPayPrize, orderPayNote, orderPayRemove };
+  },
+
+  addItemToCart(cardElement) {
+    const itemName = cardElement.querySelector('.card__info__content__name').textContent;
+    const orderPay = document.querySelector('.order-pay');
+    const existingItem = orderPay.querySelector(`[data-name="${itemName}"]`);
+
+    if (existingItem) {
+      const quantityInput = existingItem.nextElementSibling;
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+      quantityInput.dispatchEvent(new Event('input'));
+    } else {
+      const priceAfter = parseInt(cardElement.querySelector('.card__info__price__after').textContent.replace(/\D/g, ''));
+      const { orderPayDetail, orderPayQuantity, orderPayPrize, orderPayNote, orderPayRemove, } = this.createOrderPayDetail(itemName, priceAfter);
+
+      orderPay.append(orderPayDetail, orderPayQuantity, orderPayPrize, orderPayNote, orderPayRemove);
+    }
+  },
+
+  attachAddToCartEvents() {
+    const addButtonsToCart = document.querySelectorAll('.card__header__button');
+    addButtonsToCart.forEach((button) => {
+      button.addEventListener('click', () => {
+        const cardElement = button.parentElement.parentElement;
+        this.addItemToCart(cardElement);
       });
     });
-    
   },
 };
- 
+
 export default Homepage;

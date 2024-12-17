@@ -686,7 +686,7 @@ input:focus {
 .order-pay {
   display: grid;
   grid-template-columns: 1fr auto auto;
-  grid-template-rows: repeat(auto-fill, 60px);
+  grid-template-rows: 40px repeat(auto-fill, 70px);
   row-gap: .6rem;
   height: 100%;
   overflow-y: auto;
@@ -696,14 +696,13 @@ input:focus {
 .order-pay__header__quantity,
 .order-pay__header__price {
   padding: .8rem;
-  border-bottom: 1px solid var(--blue);
+  border-bottom: 1px solid var(--light-blue);
   color: var(--blue);
   font-weight: bold;
 }
 
 .order-pay__header__item {
-  margin-left: .8rem;
-  padding-left: 0;
+  padding-left: .8rem;
 }
 
 .order-pay__detail {
@@ -748,7 +747,7 @@ input:focus {
 
 .order-pay__header__price,
 .order-pay__detail__price {
-  width: 5rem;
+  width: 6rem;
 }
 
 .order-pay__detail__price {
@@ -785,6 +784,33 @@ input:focus {
 .order-pay__detail__remove img {
   width: 40px;
   height: 40px;
+}
+
+.payment-configuration {
+  background-color: var(--white);
+  border-left: 1px solid var(--blue);
+  padding: .6rem;
+}
+
+.content__info__header.configuration {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--blue);
+  margin: 0 1rem;
+}
+
+.content__info__header.configuration p {
+  color: var(--light-blue);
+}
+
+.content__info__header.configuration > button {
+  background-color: var(--blue);
+  border: none;
+  color: var(--white);
+  padding: .2rem .8rem;
+  border-radius: .4rem;
+  cursor: pointer;
 }
 
 @keyframes fade-in {
