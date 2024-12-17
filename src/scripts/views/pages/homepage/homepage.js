@@ -139,6 +139,11 @@ const Homepage = {
           <button>Cash</button>
         </div>
       </div>
+
+      <div class="payment-configuration__body__content">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/800px-QR_code_for_mobile_English_Wikipedia.svg.png" />
+      </div>
+
       <div class="payment-configuration__footer">
         <button class="payment-configuration__footer__cancel">Batalkan</button>
         <button class"payment-configuration__footer__confirm">Konfirmasi</button>
@@ -160,6 +165,41 @@ const Homepage = {
 
     cancelPayment.addEventListener('click', () => {
       popupPayment.style.top = '-100%';
+    });
+
+    const changePaymentButton = paymentConfiguration.querySelectorAll('.payment-configuration__selection button');
+    const changeToQrisButton = changePaymentButton[0];
+    const changeToCashButton = changePaymentButton[1];
+
+    changeToQrisButton.addEventListener('click', () => {
+      const paymentContent = document.querySelector('.payment-configuration__body__content');
+
+      changeToQrisButton.classList.add('active');
+      changeToCashButton.classList.remove('active');
+      paymentContent.innerHTML = `
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/800px-QR_code_for_mobile_English_Wikipedia.svg.png" />
+      `;
+    });
+
+    changeToCashButton.addEventListener('click', () => {
+      const paymentContent = document.querySelector('.payment-configuration__body__content');
+
+      changeToQrisButton.classList.remove('active');
+      changeToCashButton.classList.add('active');
+      paymentContent.innerHTML = `
+        <div class="payment-configuration__body__content__cash">
+          <div class="payment-configuration__body__content__cash__input">
+            <label>Total Bayar</label>
+            <input placeholder="Masukkan Total Bayar"/>
+          </div>
+          <div class="payment-configuration__body__content__cash__button">
+            <button>0%</button>
+            <button>25%</button>
+            <button>50%</button>
+            <button>100%</button>
+          </div>
+        </div>
+      `;
     });
 
     popupPayment.style.top = '0';
