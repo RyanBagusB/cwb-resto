@@ -1,4 +1,4 @@
-import { createAddCard, createCardItemTemplate } from "../../templates/template-creator";
+import { createAddCard, createCardItemTemplate } from "../../../templates/template-creator";
 
 const items = [
   {

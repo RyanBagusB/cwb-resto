@@ -1,18 +1,17 @@
-import { createAddCard } from "../../templates/template-creator";
+import { createAddCard } from "../../../templates/template-creator";
 
-
-const TaxManagement = {
+const PrinterManagement = {
   async render() {
     return `
-      <h3>Kelola Pajak</h3>
+      <h3>Kelola Printer</h3>
       <div class="management">
         <nav class="management__navigation">
-          <div class="management__navigation__tabs">
+          <div class="management__navigation__tabs printer">
             <input type="radio" id="service" name="tabs" checked>
-            <label for="service">Layanan</label>
+            <label for="service">Wifi / LAN</label>
             
             <input type="radio" id="tax" name="tabs">
-            <label for="tax">Pajak</label>
+            <label for="tax">Bluetooth</label>
           </div>
         </nav>
 
@@ -27,37 +26,45 @@ const TaxManagement = {
             <div class="popup-add-card__content__header">
               <button>x</button>
             </div>
-            <h4>Perhitungan Biaya</h4>
+            <h4>Tambah Printer</h4>
           </div>
 
           <div class="popup-add-card__content__form">
             <div class="popup-add-card__content__form__input">
-              <label>Biaya Pengiriman</label>
-              <input placeholder="Masukkan Ongkir"/>
-              <label class="popup-add-card__content__form__input__checkbox">
-                Sertakan Ongkir dalam Pajak 
-                <input type="checkbox" />
-                <span class="checkmark"></span>
-              </label>
+              <label>Nama Printer</label>
+              <input placeholder="Masukkan Nama Printer"/>
             </div>
 
             <div class="popup-add-card__content__form__input">
-              <label>Biaya Layanan</label>
-              <input placeholder="Masukkan Biaya Layanan"/>
-              <label class="popup-add-card__content__form__input__checkbox">
-                Sertakan Ongkir dalam Pajak 
-                <input type="checkbox" />
-                <span class="checkmark"></span>
-              </label>
+              <label>Alamat IP</label>
+              <input placeholder="Masukkan Alamat IP"/>
             </div>
 
             <div class="popup-add-card__content__form__input">
-              <label>Pajak</label>
+              <label>Ukuran Struk</label>
               <div class="popup-add-card__content__form__input__presentage__tax">
                 <input />
-                <p>%</p>
+                <p> > </p>
               </div>
             </div>
+
+            <label class="popup-add-card__content__form__input__checkbox">
+              <div class="popup-add-card__content__form__input__checkbox__label">
+                <p>Potong struk setelah selesai cetak</p>
+                <p>hanya aktifkan jika printer kamu support</p>
+              </div>
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
+
+            <label class="popup-add-card__content__form__input__checkbox">
+              <div class="popup-add-card__content__form__input__checkbox__label">
+              <p>Buka laci setelah selesai cetak</p>
+              <p>hanya aktifkan jika printer kamu support</p>
+              </div>
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+            </label>
           </div>
 
           <div class="popup-add-card__content__footer">
@@ -80,4 +87,4 @@ const TaxManagement = {
   },
 };
 
-export default TaxManagement;
+export default PrinterManagement;

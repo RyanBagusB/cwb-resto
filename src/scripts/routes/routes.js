@@ -1,10 +1,13 @@
-import Setting from '../views/pages/setting/setting';
-import DiscountManagement from '../views/pages/setting/discountManagement';
-import TaxManagement from '../views/pages/setting/taxManagement';
-import PrinterManagement from '../views/pages/setting/printerManagement';
-import Homepage from '../views/pages/homepage/homepage';
- 
-const routes = {
+import Homepage from '../views/pages/admin/homepage/homepage';
+import DiscountManagement from '../views/pages/admin/setting/discountManagement';
+import PrinterManagement from '../views/pages/admin/setting/printerManagement';
+import Setting from '../views/pages/admin/setting/setting';
+import TaxManagement from '../views/pages/admin/setting/taxManagement';
+
+import Home from '../views/pages/user/home/home';
+import Menu from '../views/pages/user/menu/menu';
+
+const adminRoutes = {
   '/': Homepage,
   '/home': Homepage,
   '/setting': Setting,
@@ -16,5 +19,10 @@ const settingRoutes = {
   'kelola-pajak': TaxManagement,
   'kelola-printer': PrinterManagement,
 }
+
+const userRoutes = {
+  '/': Home,
+  '/menu': Menu,
+};
  
-export { routes, settingRoutes };
+export { adminRoutes, userRoutes, settingRoutes };

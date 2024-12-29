@@ -1,6 +1,6 @@
 import 'regenerator-runtime';
-import '../styles/user/style.css'
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import '../styles/admin/style.css';
+import '../styles/admin/responsive.css';
 import App from './views/app';
 
 const app = new App({
@@ -10,9 +10,9 @@ const app = new App({
 });
 
 window.addEventListener('hashchange', () => {
-  app.renderUserPage();
+  app.renderAdminPage();
 });
  
 window.addEventListener('load', () => {
-  app.renderUserPage();
+  app.renderAdminPage();
 });

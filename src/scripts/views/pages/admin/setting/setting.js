@@ -1,5 +1,5 @@
-import { settingRoutes } from "../../../routes/routes";
-import UrlParser from "../../../routes/url-parser";
+import { settingRoutes } from "../../../../routes/routes";
+import UrlParser from "../../../../routes/url-parser";
 
 const Setting = {
   async render() {

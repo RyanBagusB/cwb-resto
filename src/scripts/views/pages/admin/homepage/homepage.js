@@ -1,4 +1,4 @@
-import { createCardItemTemplate } from "../../templates/template-creator";
+import { createCardItemTemplate } from "../../../templates/template-creator";
 
 const items = [
   { name: 'Healthy noodle with spinach leaf', category: 'Makanan', priceBefore: 40000, priceAfter: 20000 },
