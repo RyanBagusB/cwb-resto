@@ -29,6 +29,10 @@ section {
   padding: 1rem 5%;
 }
 
+section.menu-detail {
+  padding: 1rem 0;
+}
+
 .carousel {
   display: flex;
   flex-direction: column;
@@ -80,6 +84,7 @@ section {
   gap: .8rem;
 }
 
+.menu-detail-content button,
 .card button,
 .category-item__navigation button.active,
 .carousel__slider__container__item figcaption button {
@@ -217,4 +222,51 @@ section {
 .card figcaption button {
   margin-top: auto;
   font-size: .7rem;
+}
+
+
+.menu-detail {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.menu-detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+  padding: 1rem 5%;
+  flex: 1;
+}
+
+.menu-detail .carousel__slider {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+
+.menu-detail-content__info {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+
+.menu-detail-content__info h2 {
+  color: var(--light-green);
+  font-size: 1.9rem;
+}
+
+.menu-detail-content__info__price {
+  display: flex;
+  gap: 1rem;
+}
+
+.menu-detail-content button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  box-shadow: none;
+  margin-top: auto;
 }
