@@ -22,9 +22,10 @@ class App {
   
   async renderUserPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
+    const urlId = UrlParser.parseActiveUrlWithoutCombiner().id;
     const page = userRoutes[url];
 
-    if (url === this._currentPage) {
+    if (url === this._currentPage && urlId === null) {
       await page.afterRender();
       return;
     }
