@@ -155,12 +155,16 @@ const Menu = {
   },
 
   updatePaginationOnScroll(carouselContainer) {
-    const carouselPaginationIndex = carouselContainer.scrollLeft / carouselContainer.clientWidth;
-    this.removeActiveClassFromPagination();
-    const activePaginationButton = document.querySelectorAll('.carousel__slider__dots button')[Math.round(carouselPaginationIndex)];
-    activePaginationButton.classList.add('active');
-    carouselContainer.querySelector('.carousel__slider__container__item.active').classList.remove('active');
-    carouselContainer.children[Math.round(carouselPaginationIndex)].classList.add('active');
+    try {
+      const carouselPaginationIndex = carouselContainer.scrollLeft / carouselContainer.clientWidth;
+      const activePaginationButton = document.querySelectorAll('.carousel__slider__dots button')[Math.round(carouselPaginationIndex)];
+      this.removeActiveClassFromPagination();
+      activePaginationButton.classList.add('active');
+      carouselContainer.querySelector('.carousel__slider__container__item.active').classList.remove('active');
+      carouselContainer.children[Math.round(carouselPaginationIndex)].classList.add('active');
+    } catch (error) {
+      clearInterval(this.slideInterval);
+    }
   },
 
   autoSlide(carouselContainer) {
